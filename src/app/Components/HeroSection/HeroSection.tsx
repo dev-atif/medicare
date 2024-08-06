@@ -20,7 +20,8 @@ const HeroSection = () => {
         </div>
         <div className="flex justify-end">
           <div className="w-1/4 ">
-            <UploadPrescription />
+          
+            <UploadPrescription bgmain={"bg-white"} inerbg={'bg-[#F1F5F9]'} title={"Uplaod Prescription"} textcolor={"text-[#072400]"} btncolor={"bg-[#072400]"} paddingy={'py-5'} size={100}/>
           </div>
         </div>
         <div className="flex  gap-4 w-1/3">

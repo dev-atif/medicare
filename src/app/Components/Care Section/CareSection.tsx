@@ -39,7 +39,7 @@ const CareSection = () => {
         <div className='flex gap-8 justify-center'>
        {
         Data.map((itm,idx)=>(
-            <div  className=' '>
+            <div  key={idx}>
             <Image src={itm.image} alt={itm.slug}   className='h-48 hover:scale-105 transform transition-all duration-300 object-cover w-48 rounded-xl  '/>
             <h1 className='text-[#232458] font-semibold text-center mt-3'>
                 {itm.slug}
