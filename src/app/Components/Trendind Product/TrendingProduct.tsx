@@ -131,11 +131,11 @@ const router = useRouter()
 
       <div className="mt-10">
         <div className="flex  flex-wrap gap-6 justify-center">
-          {ProductData.map((itm, idx) => (
+          {/* {ProductData.map((itm, idx) => (
             <div key={idx} className="w-[23%]">
               <ProductCard data={itm} />
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     </div>

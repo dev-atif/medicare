@@ -49,13 +49,13 @@ const ProductDealList = () => {
           </span>
         </Link>
       </div>
-      <div className="flex gap-8 mt-12">
+      {/* <div className="flex gap-8 mt-12">
         {ProductData.map((itm, idx) => (
           <div className=" " key={idx}>
             <ProductCard data={itm} />
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
