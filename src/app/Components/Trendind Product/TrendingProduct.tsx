@@ -1,17 +1,14 @@
+'use client'
 import React from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 import product from "../../../../public/product.png";
 import ProductCard from "@/app/Shared/ProductCard";
-const cat = [
-  "Cardiology",
-  "Neurology",
-  "Pediatrics",
-  "Gastroenterology",
-  "Nephrology",
-  "Gynecology",
-  "Orthopedics",
-  "Urology",
-];
+import { useQuery } from "@tanstack/react-query";
+import request from "graphql-request";
+import { GET_ALL_COMPANIES } from "@/Graphql/Queries";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+
 const ProductData = [
   {
     image: product,
@@ -78,7 +75,31 @@ const ProductData = [
     Price: "80.00",
   },
 ];
+interface item {
+  Company: String;
+}
+interface AllCompany {
+  GetallCompany: {
+    companyies: item[];
+  };
+}
 const TrendingProduct = () => {
+const router = useRouter()
+  const searchParams = useSearchParams()
+  const params =new URLSearchParams(searchParams.toString())
+  const { data }: any = useQuery({
+    queryKey: ["companyies"],
+    queryFn: async () => {
+      const response:AllCompany = await request(
+        "http://localhost:4000",
+        GET_ALL_COMPANIES
+      );
+      return response.GetallCompany
+    },
+    
+    staleTime: 5 * 1000,
+  });
+  console.log("fetch data", data);
   return (
     <div className="px-20 ">
       <div className="flex  items-end justify-between">
@@ -86,7 +107,7 @@ const TrendingProduct = () => {
           Trending Products for you!
         </h1>
         <p className="uppercase text-sm text-[#242A60] cursor-pointer group flex items-center gap-2">
-          See All Products{" "}
+          <Link href={'/AllProduct'}>See All Products{" "}</Link>
           <span className="group-hover:translate-x-2 transition-all transform duration-300">
             <FaArrowRightLong />
           </span>
@@ -94,10 +115,14 @@ const TrendingProduct = () => {
       </div>
       {/* --------Category------------------ */}
       <div className=" flex flex-wrap mt-10 ">
-        {cat.map((itm, idx) => (
+        {data?.map((itm:any, idx:any) => (
           <div key={idx}>
-            <button className="bg-[#F1F5F9] rounded-full px-8 hover:bg-[#163300] hover:text-[#93D366] transform transition-all text-lg duration-300 text-[#26275C] font-semibold py-2  ">
-              {itm}
+            <button onClick={()=>{
+            
+              params.set('cat',itm.Company)
+              router.push(`/AllProduct?${params.toString()}`);
+            }}   className="bg-[#F1F5F9] rounded-full px-8 hover:bg-[#163300] hover:text-[#93D366] transform transition-all text-base duration-300 text-[#26275C] font-semibold py-2  ">
+              {itm.Company}
             </button>
           </div>
         ))}

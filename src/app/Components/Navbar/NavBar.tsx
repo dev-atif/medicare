@@ -1,12 +1,28 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../../../../public/Logo.png";
 import { IoLocationOutline } from "react-icons/io5";
 import { BiSolidOffer } from "react-icons/bi";
 import SearchInput from "./SearchInput";
 import { IoCartOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
+import Link from "next/link";
+
 const NavBar = () => {
+  const [cartLength, setCartLength] = useState(0);
+  useEffect(() => {
+    const fetchCartLength = () => {
+      const cart = JSON.parse(localStorage.getItem("Cart") || "[]");
+      setCartLength(cart.length);
+    };
+
+    fetchCartLength(); // Fetch initially
+
+    const intervalId = setInterval(fetchCartLength, 500); // Update every second
+
+    return () => clearInterval(intervalId); // Clear interval on component unmount
+  }, []);
   return (
     <div className="h-20 bg-[#F6F7F8] flex items-center mx-5 mt-5 rounded-xl px-10 justify-between">
       {/* Left Side */}
@@ -14,18 +30,21 @@ const NavBar = () => {
         <div className="w-[40%]">
           {/* --------Logo------------ */}
 
-          <Image src={Logo} alt="Logo" />
+          <Link href={"/"}>
+            {" "}
+            <Image src={Logo} alt="Logo" />
+          </Link>
         </div>
         {/* Search Location -------------------------------------- */}
         <div className=" flex items-center gap-5">
           <div className="w-[3px] bg-[#E5E8EC] h-8"></div>
-          <div className="flex flex-col items-center justify-center w-full">
+          {/* <div className="flex flex-col items-center justify-center w-full">
             <form className="">
               <label
                 htmlFor="countries"
                 className=" flex  items-center gap-1 text-[#9CA3B1] text-sm font-medium"
               >
-               <IoLocationOutline className="text-base" /> Select Location
+                <IoLocationOutline className="text-base" /> Select Location
               </label>
               <select
                 id="countries"
@@ -38,7 +57,7 @@ const NavBar = () => {
                 <option value="DE">Germany</option>
               </select>
             </form>
-          </div>
+          </div> */}
         </div>
         {/* ---------------------------------------Search Bar */}
         <div className="w-full">
@@ -60,16 +79,23 @@ const NavBar = () => {
           </select>
         </div>
         <div>
-        <h3 className="text-[#FF5C04] flex items-center font-medium gap-1"><BiSolidOffer size={30}/> Offers</h3>
+          <h3 className="text-[#FF5C04] flex items-center font-medium gap-1">
+            <BiSolidOffer size={30} /> Offers
+          </h3>
+        </div>
+        <div className="relative">
+          <div className="bg-[#FF5C04] -top-2 left-3 text-sm text-center absolute rounded-full w-6 h-6 flex items-center justify-center text-white">
+            <span>{cartLength}</span>
+          </div>
+          <Link href={"/Cart"} className=" flex items-center font-medium gap-1">
+            <IoCartOutline size={30} /> Cart
+          </Link>
         </div>
         <div>
-        <h3 className=" flex items-center font-medium gap-1"><IoCartOutline size={30}/> Cart</h3>
+          <h3 className=" flex items-center font-medium gap-1">
+            <FaRegUser size={30} /> Login
+          </h3>
         </div>
-        <div>
-        <h3 className=" flex items-center font-medium gap-1">
-        <FaRegUser size={30}/> Login</h3>
-        </div>
-        
       </div>
     </div>
   );

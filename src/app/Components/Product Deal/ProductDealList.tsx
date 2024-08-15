@@ -2,6 +2,7 @@ import ProductCard from "@/app/Shared/ProductCard";
 import React from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 import product from "../../../../public/product.png";
+import Link from "next/link";
 const ProductData = [
   {
     image: product,
@@ -41,12 +42,12 @@ const ProductDealList = () => {
         <h1 className="text-4xl font-bold w-1/4 text-[#242A60]">
           Todays best deals for you!
         </h1>
-        <p className="uppercase text-sm text-[#242A60] cursor-pointer group flex items-center gap-2">
+        <Link href={'/AllProduct'} className="uppercase text-sm text-[#242A60] cursor-pointer group flex items-center gap-2">
           See All Products{" "}
           <span className="group-hover:translate-x-2 transition-all transform duration-300">
             <FaArrowRightLong />
           </span>
-        </p>
+        </Link>
       </div>
       <div className="flex gap-8 mt-12">
         {ProductData.map((itm, idx) => (

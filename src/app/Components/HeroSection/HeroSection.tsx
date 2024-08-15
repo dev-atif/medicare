@@ -1,13 +1,21 @@
+"use client";
 import UploadPrescription from "@/app/Shared/UploadPrescription";
 import { TbTruckDelivery } from "react-icons/tb";
 import { AiFillStar } from "react-icons/ai";
-import hero from '../../../../public/hero.png'
+import hero from "../../../../public/hero.png";
 import React from "react";
 import Image from "next/image";
 
+import { GET_ALL_COMPANIES } from "@/Graphql/Queries";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import request from "graphql-request";
+
+
+
 const HeroSection = () => {
   return (
-    <div >
+    <div>
       <div className="bg-[#9FE870] relative rounded-3xl mt-3 px-10 pb-28 -z-10 -mb-10">
         <h1 className="text-[#163300] font-bold text-[17rem] leading-tight">
           Pharmacy
@@ -20,8 +28,15 @@ const HeroSection = () => {
         </div>
         <div className="flex justify-end">
           <div className="w-1/4 ">
-          
-            <UploadPrescription bgmain={"bg-white"} inerbg={'bg-[#F1F5F9]'} title={"Uplaod Prescription"} textcolor={"text-[#072400]"} btncolor={"bg-[#072400]"} paddingy={'py-5'} size={100}/>
+            <UploadPrescription
+              bgmain={"bg-white"}
+              inerbg={"bg-[#F1F5F9]"}
+              title={"Uplaod Prescription"}
+              textcolor={"text-[#072400]"}
+              btncolor={"bg-[#072400]"}
+              paddingy={"py-5"}
+              size={100}
+            />
           </div>
         </div>
         <div className="flex  gap-4 w-1/3">
@@ -46,11 +61,9 @@ const HeroSection = () => {
         </div>
         {/* --------------------Hero Model */}
         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 ">
-        <Image src={hero} alt="hero" width={700}/>
+          <Image src={hero} alt="hero" width={700} />
+        </div>
       </div>
-      </div>
-      
-     
     </div>
   );
 };

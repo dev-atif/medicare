@@ -9,12 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.51.21",
+    "@tanstack/react-query-devtools": "^5.51.21",
+    "ag-grid-react": "^32.1.0",
+    "axios": "^1.7.3",
+    "graphql-request": "^7.1.0",
+    "graphql-tag": "^2.12.6",
     "next": "14.2.5",
+    "rc-slider": "^11.1.5",
+    "rc-tooltip": "^6.2.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^5.2.1"
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.2.1",
+    "react-query": "^3.39.3"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typescript": "^4.0.9",
+    "@graphql-codegen/typescript-operations": "^4.2.3",
+    "@graphql-codegen/typescript-react-query": "^6.1.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
