@@ -7,7 +7,7 @@ import { GetAllDataResponse, GetAllDataVariables, Product } from "@/types";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import request from "graphql-request";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const AllProduct = () => {
@@ -143,7 +143,8 @@ const AllProduct = () => {
   console.warn("loaded data", totalPages);
 
   return (
-    <div>
+    <Suspense fallback={<div>Loading..</div>}>
+      <div>
       <div className="px-12">
         <div className="mt-12 flex items-center justify-center">
           <div></div>
@@ -211,6 +212,7 @@ const AllProduct = () => {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 };
 
