@@ -1,10 +1,11 @@
 import React from 'react'
 import AllProduct from '../Components/AllProduct/AllProduct'
 
-const page = () => {
+const page = (props:any) => {
+  console.warn('props',props)
   return (
     <div>
-       <AllProduct/>
+       <AllProduct props={props}/>
     </div>
   )
 }

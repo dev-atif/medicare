@@ -10,15 +10,17 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-const AllProduct = () => {
-  const searchParams = useSearchParams();
+const AllProduct = ({props}:any) => {
+ 
+  const {searchParams} =props
+ 
   const router = useRouter();
   const limit = 8;
   const params = new URLSearchParams(window.location.search);
-  const initialPage = Math.max(parseInt(searchParams.get("page") || "1"), 1);
-  const Cat = searchParams.get("cat");
-  const order = searchParams.get("order");
-  const priceRange = parseInt(searchParams.get("price") || "0");
+  const initialPage = Math.max(parseInt(searchParams.page || "1"), 1);
+  const Cat = searchParams.cat
+  const order = searchParams.order;
+  const priceRange = parseInt(searchParams.price || "0");
   const [filterdata, setFIlterData] = useState<Product[]>([]);
 
   const [page, setPage] = useState(initialPage);

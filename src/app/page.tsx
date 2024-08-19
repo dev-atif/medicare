@@ -6,7 +6,7 @@ import ConsulationSection from "./Components/Consulation/ConsulationSection";
 import TrendingProduct from "./Components/Trendind Product/TrendingProduct";
 import OfferSection from "./Components/Offer Section/OfferSection";
 
-export default function Home() {
+export default function Home(props:any) {
   return (
   <main className="px-5 pb-20">
    <section>
@@ -21,7 +21,7 @@ export default function Home() {
    <section>
     <ConsulationSection/>
    </section>
-   <section><TrendingProduct/></section>
+   <section><TrendingProduct props={props}/></section>
    <section>
     <OfferSection/>
    </section>

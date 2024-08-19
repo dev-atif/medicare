@@ -83,9 +83,9 @@ interface AllCompany {
     companyies: item[];
   };
 }
-const TrendingProduct = () => {
+const TrendingProduct = ({props}:any) => {
 const router = useRouter()
-  const searchParams = useSearchParams()
+  const {searchParams} = props
   const params =new URLSearchParams(searchParams.toString())
   const { data }: any = useQuery({
     queryKey: ["companyies"],
