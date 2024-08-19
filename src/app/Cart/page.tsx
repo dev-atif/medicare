@@ -12,6 +12,10 @@ import cartImage from "../../../public/empty cart.png";
 import Link from "next/link";
 import { MdNavigateNext } from "react-icons/md";
 import useAmount from "@/Hooks/useAmount";
+import { Query, useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { ADD_TO_CART_MUTATION } from "@/Graphql/Mutation";
 const page = () => {
   const { cart, increaseQuantity, decreaseQuantity, deleteProduct, clearCart } =
     UseCart();
@@ -23,6 +27,44 @@ const page = () => {
   };
 
   const totalAmount = calculateTotalAmount();
+
+  //Mutation Code -------------------
+  const Mutation = useMutation({
+    mutationFn: async (cartItems: Product[]) => {
+      const itemsMutation = cart.map((itm: Product) => {
+        const item = {
+          id: itm.id,
+          Item_Name: itm.Item_Name,
+          quantity: itm.quantity,
+          Item_Category: itm.Item_Category,
+          Sale_Price: itm.Sale_Price,
+        };
+        return item;
+      });
+      const response = await axios.post("http://localhost:4000/", {
+        query: ADD_TO_CART_MUTATION.loc?.source.body,
+        variables: { cartItems: itemsMutation },
+      });
+      return response.data;
+    },
+    onSuccess: async () => {
+      toast.success("your Order has been placed");
+    },
+    onError: async () => {
+      toast.error("Failed to place the order");
+    },
+  });
+
+  //process Submit Function ----------------
+  const handleProceed = (e: any) => {
+    e.preventDefault();
+    if (cart.length > 0) {
+      Mutation.mutate(cart);
+    } else {
+      toast.error("Cart is Empty");
+    }
+  };
+
   return (
     <div>
       {cart.length > 0 ? (
@@ -121,7 +163,10 @@ const page = () => {
                   </span>
                   Clear Cart
                 </button>
-                <button className="bg-[#FF5C04] hover:bg-[#9FE870] transition-all transform duration-300 flex items-center justify-center gap-4 w-1/4 py-2 text-white font-bold rounded-xl">
+                <button
+                  onClick={handleProceed}
+                  className="bg-[#FF5C04] hover:bg-[#9FE870] transition-all transform duration-300 flex items-center justify-center gap-4 w-1/4 py-2 text-white font-bold rounded-xl"
+                >
                   Proceed
                   <span>
                     <MdNavigateNext size={20} />

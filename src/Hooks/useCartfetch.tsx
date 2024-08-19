@@ -7,6 +7,7 @@ const UseCart = () => {
     const cartData = JSON.parse(localStorage.getItem("Cart") || "[]");
     setCart(cartData);
     // Generate columns automatically if data exists
+   
   }, []);
   const saveCartToLocalStorage = (updatedCart: any) => {
     localStorage.setItem("Cart", JSON.stringify(updatedCart));
