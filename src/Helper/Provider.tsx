@@ -1,4 +1,5 @@
 'use client'
+import NavBar from '@/app/Components/Navbar/NavBar'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
 import React from 'react'
@@ -9,6 +10,7 @@ const QueryProvider = ({children}:any) => {
   return (
     <QueryClientProvider client={Query}>
         <div>
+       
         <Toaster />
             {children}
             

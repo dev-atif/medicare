@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css"; // Core grid CSS
 import "ag-grid-community/styles/ag-theme-alpine.css"; // Optional theme CSS
@@ -16,9 +16,13 @@ import { Query, useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { ADD_TO_CART_MUTATION } from "@/Graphql/Mutation";
+import { useRouter } from "next/navigation";
+
 const page = () => {
+  const [showConfetti, setShowConfetti] = useState(false);
   const { cart, increaseQuantity, decreaseQuantity, deleteProduct, clearCart } =
     UseCart();
+  const router = useRouter();
   const { ProductAmount, overallTotal } = useAmount();
   const calculateTotalAmount = () => {
     return cart.reduce((total, item: any) => {
@@ -58,6 +62,12 @@ const page = () => {
   //process Submit Function ----------------
   const handleProceed = (e: any) => {
     e.preventDefault();
+    const Auth = sessionStorage.getItem("auth_token");
+    if (!Auth) {
+      toast.error("Please Login First to proceed");
+      router.push("/login");
+      return;
+    }
     if (cart.length > 0) {
       Mutation.mutate(cart);
     } else {
@@ -67,6 +77,7 @@ const page = () => {
 
   return (
     <div>
+      <div></div>
       {cart.length > 0 ? (
         <>
           <div className="max-w-7xl mx-auto">

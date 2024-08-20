@@ -8,10 +8,18 @@ import SearchInput from "./SearchInput";
 import { IoCartOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NavBar = () => {
   const [cartLength, setCartLength] = useState(0);
+  const [auth,setAuth]=useState<string| null>(null)
+  const pathname = usePathname();
+  useEffect(()=>{
+    const AuthToken = sessionStorage.getItem("auth_token");
+    setAuth(AuthToken)
+  },[auth,setAuth])
   useEffect(() => {
+    
     const fetchCartLength = () => {
       const cart = JSON.parse(localStorage.getItem("Cart") || "[]");
       setCartLength(cart.length);
@@ -24,7 +32,11 @@ const NavBar = () => {
     return () => clearInterval(intervalId); // Clear interval on component unmount
   }, []);
   return (
-    <div className="h-20 bg-[#F6F7F8] flex items-center mx-5 mt-5 rounded-xl px-10 justify-between">
+    <div
+      className={`h-20 bg-[#F6F7F8] flex items-center mx-5 mt-5 rounded-xl px-10 justify-between ${
+        pathname === "/login" || pathname === "/signup" ? "hidden" : ""
+      }`}
+    >
       {/* Left Side */}
       <div className="flex items-center justify-between gap-8">
         <div className="w-[40%]">
@@ -92,9 +104,24 @@ const NavBar = () => {
           </Link>
         </div>
         <div>
-          <h3 className=" flex items-center font-medium gap-1">
-            <FaRegUser size={30} /> Login
-          </h3>
+          {auth!==null ? (
+            <Link
+              href={"/login"}
+              onClick={() => {
+                sessionStorage.removeItem("auth_token");
+              }}
+              className=" flex items-center font-medium gap-1"
+            >
+              <FaRegUser size={30} /> Log Out
+            </Link>
+          ) : (
+            <Link
+              href={"/login"}
+              className=" flex items-center font-medium gap-1"
+            >
+              <FaRegUser size={30} /> Login
+            </Link>
+          )}
         </div>
       </div>
     </div>
