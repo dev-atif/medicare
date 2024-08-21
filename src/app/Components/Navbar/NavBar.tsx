@@ -9,13 +9,17 @@ import { IoCartOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/Hooks/useRedux";
+import { removeToken } from "@/redux/slices/token-slices";
 
 const NavBar = () => {
   const [cartLength, setCartLength] = useState(0);
   const [auth,setAuth]=useState<string| null>(null)
   const pathname = usePathname();
+  const {token} = useAppSelector(s=>s.token)
+  const dispatch = useAppDispatch()
   useEffect(()=>{
-    const AuthToken = sessionStorage.getItem("auth_token");
+    const AuthToken = token
     setAuth(AuthToken)
   },[auth,setAuth])
   useEffect(() => {
@@ -104,22 +108,23 @@ const NavBar = () => {
           </Link>
         </div>
         <div>
-          {auth!==null ? (
+          {!token ? (
+            <Link
+            href={"/login"}
+            className=" flex items-center font-medium gap-1"
+          >
+            <FaRegUser size={30} /> Login
+          </Link>
+            
+          ) : (
             <Link
               href={"/login"}
               onClick={() => {
-                sessionStorage.removeItem("auth_token");
+                dispatch(removeToken())
               }}
               className=" flex items-center font-medium gap-1"
             >
               <FaRegUser size={30} /> Log Out
-            </Link>
-          ) : (
-            <Link
-              href={"/login"}
-              className=" flex items-center font-medium gap-1"
-            >
-              <FaRegUser size={30} /> Login
             </Link>
           )}
         </div>

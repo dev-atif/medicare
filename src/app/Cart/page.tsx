@@ -17,11 +17,14 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { ADD_TO_CART_MUTATION } from "@/Graphql/Mutation";
 import { useRouter } from "next/navigation";
+import withAuth from "../Components/withAuth";
+import { useAppSelector } from "@/Hooks/useRedux";
 
 const page = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const { cart, increaseQuantity, decreaseQuantity, deleteProduct, clearCart } =
     UseCart();
+    const {token} = useAppSelector(s=>s.token)
   const router = useRouter();
   const { ProductAmount, overallTotal } = useAmount();
   const calculateTotalAmount = () => {
@@ -62,7 +65,7 @@ const page = () => {
   //process Submit Function ----------------
   const handleProceed = (e: any) => {
     e.preventDefault();
-    const Auth = sessionStorage.getItem("auth_token");
+    const Auth = token
     if (!Auth) {
       toast.error("Please Login First to proceed");
       router.push("/login");
@@ -208,4 +211,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);

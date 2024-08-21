@@ -10,6 +10,7 @@ import { REGISTER_MUTATION } from "@/Graphql/Mutation";
 import toast from "react-hot-toast";
 import { RegisterState } from "@/types";
 import { useRouter } from "next/navigation";
+import withAuth from "@/app/Components/WithAtuhentication";
 
 const page = () => {
   const [toggle, setToggle] = useState(false);
@@ -206,4 +207,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);

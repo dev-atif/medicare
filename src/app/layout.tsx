@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "./Components/Navbar/NavBar";
 import QueryProvider from "@/Helper/Provider";
+import ReduxProvider from "@/Provider/reduxProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,12 +20,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <ReduxProvider>
+
+
         <div className="   hidden lg:block">
         <NavBar/>
         </div>
         <QueryProvider>
         {children}
         </QueryProvider>
+        </ReduxProvider>
         </body>
     </html>
   );

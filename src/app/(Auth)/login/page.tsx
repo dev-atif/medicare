@@ -13,6 +13,9 @@ import axios from "axios";
 import { Login_Mutation } from "@/Graphql/Mutation";
 import { useRouter } from "next/navigation";
 import { RegisterState } from "@/types";
+import withAuth from "@/app/Components/WithAtuhentication";
+import { useAppDispatch } from "@/Hooks/useRedux";
+import { setToken } from "@/redux/slices/token-slices";
 const page = () => {
   const [toggle, setToggle] = useState(false);
   const [login, setLogin] = useState<{ email: string; password: string }>({
@@ -21,6 +24,7 @@ const page = () => {
   });
 
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const mutation = useMutation({
     mutationKey: ["Login "],
     mutationFn: async (input: any) => {
@@ -33,8 +37,8 @@ const page = () => {
     onSuccess: (data) => {
       const token = data.data.signIn; // Adjust based on your actual response structure
       if (token) {
-        sessionStorage.setItem("auth_token", token);
-      
+        dispatch(setToken(token));
+
         toast.success("Login Successful");
         router.back();
       } else {
@@ -160,4 +164,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);
