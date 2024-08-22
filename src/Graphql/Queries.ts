@@ -32,13 +32,17 @@ export const Get_All_Product = gql`
 export const GetallOrder = gql`
   query GetallProduct {
     GetallOrder {
-      items {
-        Item_Name
-        quantity
-          Item_Category
-        Sale_Price
-      }
+    id
+    createdAt
+    userName
+    items {
+      id
+      Item_Name
+      quantity
+      Item_Category
+      Sale_Price
     }
+  }
   }
 `;
 export const GetSingleUser = gql`

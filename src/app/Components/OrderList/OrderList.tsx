@@ -40,6 +40,10 @@ const OrderList = () => {
                       }, 0)}
                     </span>
                   </h1>
+                  <h1 className="text-lg font-bold tracking-widest">
+                    Order By
+                    <span className="text-[#FF5C04]">({order?.userName})</span>
+                  </h1>
                 </div>
                 <table className="w-full min-w-full divide-y border  border-[#9FE870] divide-[#9FE870]">
                   <thead className="bg-[#9FE870] ">
