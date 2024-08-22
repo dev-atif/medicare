@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import HeroSection from "./Components/HeroSection/HeroSection";
 import CareSection from "./Components/Care Section/CareSection";
@@ -7,8 +8,10 @@ import TrendingProduct from "./Components/Trendind Product/TrendingProduct";
 import OfferSection from "./Components/Offer Section/OfferSection";
 
 export default function Home(props:any) {
+
   return (
   <main className="px-5 pb-20">
+
    <section>
     <HeroSection/>
    </section>

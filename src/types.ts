@@ -1,4 +1,3 @@
-
 import { StaticImageData } from "next/image";
 
 export interface Product {
@@ -39,4 +38,27 @@ export interface RegisterState {
   email: string;
   password: string;
   confirmpassword: string;
+}
+export interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: "USER" | "ADMIN"; // Assuming role can be either "USER" or "ADMIN"
+}
+
+export interface UserData {
+  GetSingleUser: {
+    id: string;
+    Firstname: string;
+    Lastname: string;
+    email: string;
+    role: string;
+  };
+}
+
+ export interface MutationVariables {
+  cartItems: Product[];
+  userId: string;
+  userName: string;
 }

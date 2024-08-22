@@ -3,17 +3,22 @@ import UploadPrescription from "@/app/Shared/UploadPrescription";
 import { TbTruckDelivery } from "react-icons/tb";
 import { AiFillStar } from "react-icons/ai";
 import hero from "../../../../public/hero.png";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 
-import { GET_ALL_COMPANIES } from "@/Graphql/Queries";
+import { GET_ALL_COMPANIES, GetSingleUser } from "@/Graphql/Queries";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import request from "graphql-request";
-
-
+import useSingleUser from "@/Hooks/useSingleuser";
+import { useAppSelector } from "@/Hooks/useRedux";
 
 const HeroSection = () => {
+  // const { token } = useAppSelector((s) => s.token);
+  // const session = token;
+
+  // const {data}:any =useSingleUser({session})
+  // console.warn(data);
   return (
     <div>
       <div className="bg-[#9FE870] relative rounded-3xl mt-3 px-10 pb-28 -z-10 -mb-10">

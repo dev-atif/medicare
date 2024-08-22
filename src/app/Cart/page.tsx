@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css"; // Core grid CSS
 import "ag-grid-community/styles/ag-theme-alpine.css"; // Optional theme CSS
-import { Product } from "@/types";
+import { MutationVariables, Product } from "@/types";
 import UseCart from "@/Hooks/useCartfetch";
 import { ImCross } from "react-icons/im";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -15,16 +15,20 @@ import useAmount from "@/Hooks/useAmount";
 import { Query, useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { ADD_TO_CART_MUTATION } from "@/Graphql/Mutation";
+// import { ADD_TO_CART_MUTATION } from "@/Graphql/Mutation";
 import { useRouter } from "next/navigation";
 import withAuth from "../Components/withAuth";
 import { useAppSelector } from "@/Hooks/useRedux";
+import useSingleUser from "@/Hooks/useSingleuser";
+import { ADD_To_Cart } from "@/Graphql/Mutation";
 
 const page = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const { cart, increaseQuantity, decreaseQuantity, deleteProduct, clearCart } =
     UseCart();
-    const {token} = useAppSelector(s=>s.token)
+  const { token } = useAppSelector((s) => s.token);
+
+  const session = token;
   const router = useRouter();
   const { ProductAmount, overallTotal } = useAmount();
   const calculateTotalAmount = () => {
@@ -33,11 +37,14 @@ const page = () => {
     }, 0);
   };
 
+  const { data }: any = useSingleUser({ session });
+  console.warn(data?.GetSingleUser.Firstname);
   const totalAmount = calculateTotalAmount();
 
   //Mutation Code -------------------
   const Mutation = useMutation({
-    mutationFn: async (cartItems: Product[]) => {
+    mutationFn: async (variables: MutationVariables) => {
+      const { cartItems, userId, userName } = variables;
       const itemsMutation = cart.map((itm: Product) => {
         const item = {
           id: itm.id,
@@ -49,8 +56,8 @@ const page = () => {
         return item;
       });
       const response = await axios.post("http://localhost:4000/", {
-        query: ADD_TO_CART_MUTATION.loc?.source.body,
-        variables: { cartItems: itemsMutation },
+        query: ADD_To_Cart.loc?.source.body,
+        variables: { cartItems: itemsMutation, userId, userName },
       });
       return response.data;
     },
@@ -65,14 +72,18 @@ const page = () => {
   //process Submit Function ----------------
   const handleProceed = (e: any) => {
     e.preventDefault();
-    const Auth = token
+    const Auth = token;
     if (!Auth) {
       toast.error("Please Login First to proceed");
       router.push("/login");
       return;
     }
     if (cart.length > 0) {
-      Mutation.mutate(cart);
+      Mutation.mutate({
+        cartItems: cart,
+        userId: data?.GetSingleUser.id,
+        userName: data?.GetSingleUser.Firstname,
+      });
     } else {
       toast.error("Cart is Empty");
     }

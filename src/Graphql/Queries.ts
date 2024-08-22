@@ -41,3 +41,15 @@ export const GetallOrder = gql`
     }
   }
 `;
+export const GetSingleUser = gql`
+query getSingleUser {
+  GetSingleUser {
+    id
+    Firstname
+    Lastname
+    email
+    role
+  }
+}
+
+`
