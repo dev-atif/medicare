@@ -22,8 +22,9 @@ import { useAppSelector } from "@/Hooks/useRedux";
 import useSingleUser from "@/Hooks/useSingleuser";
 import { ADD_To_Cart } from "@/Graphql/Mutation";
 
+
 const page = () => {
-  const [showConfetti, setShowConfetti] = useState(false);
+ 
   const { cart, increaseQuantity, decreaseQuantity, deleteProduct, clearCart } =
     UseCart();
   const { token } = useAppSelector((s) => s.token);
@@ -63,6 +64,7 @@ const page = () => {
     },
     onSuccess: async () => {
       toast.success("your Order has been placed");
+      //Send Email code
     },
     onError: async () => {
       toast.error("Failed to place the order");

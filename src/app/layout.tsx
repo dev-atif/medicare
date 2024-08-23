@@ -21,16 +21,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ReduxProvider>
-
-
-        <div className="   hidden lg:block">
-        <NavBar/>
-        </div>
-        <QueryProvider>
-        {children}
-        </QueryProvider>
+          <div className="   hidden lg:block">
+            <NavBar />
+          </div>
+          <QueryProvider>{children}</QueryProvider>
         </ReduxProvider>
-        </body>
+      </body>
     </html>
   );
 }

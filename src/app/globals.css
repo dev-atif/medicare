@@ -61,3 +61,36 @@
     19px 0     0 0px, 38px 0     0 5px, 57px 0     0 0px,
     19px 19px  0 5px, 38px 19px  0 0px, 57px 19px  0 0px}
 }
+ul.ais-Hits-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+li.ais-Hits-item {
+  width: 25%;
+  
+}
+ol, ul, menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 2%;
+    justify-content: center;
+}
+li.ais-Pagination-item.ais-Pagination-item--selected.ais-Pagination-item--page {
+    background-color: #FF5C04;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border: none;
+    border-radius: 31px;
+    
+    width: 2%;
+    color: white;
+    text-align: center;
+}
+span.ais-Pagination-link {
+    color: rgb(178, 171, 171);
+    cursor: not-allowed;
+}

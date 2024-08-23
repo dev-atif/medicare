@@ -11,19 +11,25 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/Hooks/useRedux";
 import { removeToken } from "@/redux/slices/token-slices";
+import {
+  InstantSearch,
+  SearchBox,
+  Hits,
+  Pagination,
+} from "react-instantsearch-dom";
+import searchClient from "@/Helper/SearchClient";
 
 const NavBar = () => {
   const [cartLength, setCartLength] = useState(0);
-  const [auth,setAuth]=useState<string| null>(null)
+  const [auth, setAuth] = useState<string | null>(null);
   const pathname = usePathname();
-  const {token} = useAppSelector(s=>s.token)
-  const dispatch = useAppDispatch()
-  useEffect(()=>{
-    const AuthToken = token
-    setAuth(AuthToken)
-  },[auth,setAuth])
+  const { token } = useAppSelector((s) => s.token);
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    
+    const AuthToken = token;
+    setAuth(AuthToken);
+  }, [auth, setAuth]);
+  useEffect(() => {
     const fetchCartLength = () => {
       const cart = JSON.parse(localStorage.getItem("Cart") || "[]");
       setCartLength(cart.length);
@@ -77,7 +83,12 @@ const NavBar = () => {
         </div>
         {/* ---------------------------------------Search Bar */}
         <div className="w-full">
-          <SearchInput />
+          <InstantSearch
+            searchClient={searchClient}
+            indexName="Alias_Name_Index"
+          >
+            <SearchInput />
+          </InstantSearch>
         </div>
       </div>
       {/* Right Side  */}
@@ -110,17 +121,16 @@ const NavBar = () => {
         <div>
           {!token ? (
             <Link
-            href={"/login"}
-            className=" flex items-center font-medium gap-1"
-          >
-            <FaRegUser size={30} /> Login
-          </Link>
-            
+              href={"/login"}
+              className=" flex items-center font-medium gap-1"
+            >
+              <FaRegUser size={30} /> Login
+            </Link>
           ) : (
             <Link
               href={"/login"}
               onClick={() => {
-                dispatch(removeToken())
+                dispatch(removeToken());
               }}
               className=" flex items-center font-medium gap-1"
             >
