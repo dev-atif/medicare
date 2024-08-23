@@ -21,10 +21,9 @@ const AllProduct = ({ props }: any) => {
   const order = searchParams.order;
   const priceRange = parseInt(searchParams.price || "0");
   const [filterdata, setFIlterData] = useState<Product[]>([]);
-  console.log("Initail page", initialPage);
-  const [page, setPage] = useState(initialPage);
-  const skip = (initialPage - 1) * limit;
 
+  const [page, setPage] = useState(initialPage);
+  const skip = (page - 1) * limit;
   const fetchAllProducts = async (variables: GetAllDataVariables) => {
     const response = await request<GetAllDataResponse>(
       "http://localhost:4000/",
@@ -42,13 +41,13 @@ const AllProduct = ({ props }: any) => {
   });
   // Pagination for if someOne use link
   useEffect(() => {
-    // const params = new URLSearchParams(window.location.search);
-    // const pageParam = Math.max(parseInt(params.get("page") || "1"), 1);
+    const params = new URLSearchParams(window.location.search);
+    const pageParam = Math.max(parseInt(params.get("page") || "1"), 1);
 
     if (data) {
       setFIlterData(data?.GetallData?.GetallData);
     }
-    // setPage(initialPage);
+    setPage(pageParam);
   }, [router, data]);
 
   useEffect(() => {
@@ -159,7 +158,7 @@ const AllProduct = ({ props }: any) => {
           <div className="flex items-center justify-center mt-4">
             <div className="flex justify-between my-6 w-1/4 ">
               <button
-                onClick={() => ButtonHandler(initialPage - 1)}
+                onClick={() => ButtonHandler(page - 1)}
                 className={`${
                   skip === 0
                     ? "disabled bg-[#f2864c] cursor-not-allowed"
@@ -171,7 +170,7 @@ const AllProduct = ({ props }: any) => {
                 </span>
               </button>
               <button
-                onClick={() => ButtonHandler(initialPage + 1)}
+                onClick={() => ButtonHandler(page + 1)}
                 disabled={page >= totalPages}
                 className={`${
                   page >= totalPages
