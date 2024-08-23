@@ -21,7 +21,7 @@ const AllProduct = ({ props }: any) => {
   const order = searchParams.order;
   const priceRange = parseInt(searchParams.price || "0");
   const [filterdata, setFIlterData] = useState<Product[]>([]);
-
+  const [page, setPage] = useState(initialPage);
   const skip = (initialPage - 1) * limit;
   const fetchAllProducts = async (variables: GetAllDataVariables) => {
     const response = await request<GetAllDataResponse>(
@@ -40,9 +40,13 @@ const AllProduct = ({ props }: any) => {
   });
   // Pagination for if someOne use link
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const pageParam = Math.max(parseInt(params.get("page") || "1"), 1);
+
     if (data) {
       setFIlterData(data?.GetallData?.GetallData);
     }
+    setPage(pageParam);
   }, [router, data]);
 
   // useEffect(() => {
@@ -100,7 +104,7 @@ const AllProduct = ({ props }: any) => {
     if (newPage < 1) {
       newPage = 1;
     }
-
+    setPage(newPage);
     const params = new URLSearchParams(window.location.search);
     params.set("page", newPage.toString());
     if (Cat) {
@@ -179,7 +183,7 @@ const AllProduct = ({ props }: any) => {
           <div className="flex items-center justify-center mt-4">
             <div className="flex justify-between my-6 w-1/4 ">
               <button
-                onClick={() => ButtonHandler(initialPage - 1)}
+                onClick={() => ButtonHandler(page - 1)}
                 className={`${
                   skip === 0
                     ? "disabled bg-[#f2864c] cursor-not-allowed"
@@ -191,10 +195,10 @@ const AllProduct = ({ props }: any) => {
                 </span>
               </button>
               <button
-                onClick={() => ButtonHandler(initialPage + 1)}
-                disabled={initialPage >= totalPages}
+                onClick={() => ButtonHandler(page + 1)}
+                disabled={page >= totalPages}
                 className={`${
-                  initialPage >= totalPages
+                  page >= totalPages
                     ? "disabled bg-[#f2864c] cursor-not-allowed"
                     : "group"
                 } bg-[#FF5C04] w-fit p-4 transition-all transform duration-300 flex items-center justify-center rounded-full text-white`}
