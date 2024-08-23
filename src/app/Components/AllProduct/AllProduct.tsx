@@ -21,7 +21,7 @@ const AllProduct = ({ props }: any) => {
   const order = searchParams.order;
   const priceRange = parseInt(searchParams.price || "0");
   const [filterdata, setFIlterData] = useState<Product[]>([]);
-console.log("Initail page", initialPage)
+  console.log("Initail page", initialPage);
   const [page, setPage] = useState(initialPage);
   const skip = (initialPage - 1) * limit;
 
@@ -42,40 +42,14 @@ console.log("Initail page", initialPage)
   });
   // Pagination for if someOne use link
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const pageParam = Math.max(parseInt(params.get("page") || "1"), 1);
+    // const params = new URLSearchParams(window.location.search);
+    // const pageParam = Math.max(parseInt(params.get("page") || "1"), 1);
 
     if (data) {
       setFIlterData(data?.GetallData?.GetallData);
     }
-    setPage(pageParam);
+    // setPage(initialPage);
   }, [router, data]);
-
-  // useEffect(() => {
-  //   const SortingData = () => {
-  //     console.warn("order", order);
-
-  //     const sortedData: any = data?.GetallData?.GetallData.slice().sort(
-  //       (a, b): any => {
-  //         if (order === "ASC") {
-  //           // Sorting ascending
-  //           return a.Item_Name.localeCompare(b.Item_Name, "en", {
-  //             sensitivity: "base",
-  //           });
-  //         } else if (order === "DSC") {
-  //           // Sorting descending
-  //           return b.Item_Name.localeCompare(a.Item_Name, "en", {
-  //             sensitivity: "base",
-  //           });
-  //         }
-  //       }
-  //     );
-
-  //     setFIlterData(sortedData); // Update the state with sorted data
-  //   };
-
-  //   SortingData();
-  // }, [order, data?.GetallData?.GetallData]);
 
   useEffect(() => {
     let filterSortData = data?.GetallData?.GetallData || [];
@@ -185,7 +159,7 @@ console.log("Initail page", initialPage)
           <div className="flex items-center justify-center mt-4">
             <div className="flex justify-between my-6 w-1/4 ">
               <button
-                onClick={() => ButtonHandler(page - 1)}
+                onClick={() => ButtonHandler(initialPage - 1)}
                 className={`${
                   skip === 0
                     ? "disabled bg-[#f2864c] cursor-not-allowed"
@@ -197,7 +171,7 @@ console.log("Initail page", initialPage)
                 </span>
               </button>
               <button
-                onClick={() => ButtonHandler(page + 1)}
+                onClick={() => ButtonHandler(initialPage + 1)}
                 disabled={page >= totalPages}
                 className={`${
                   page >= totalPages
