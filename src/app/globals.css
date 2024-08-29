@@ -94,3 +94,11 @@ span.ais-Pagination-link {
     color: rgb(178, 171, 171);
     cursor: not-allowed;
 }
+@media (max-width: 600px) {
+li.ais-Hits-item{
+  width: 46%;
+}
+li.ais-Pagination-item.ais-Pagination-item--selected.ais-Pagination-item--page{
+  width: 6%;
+}
+}

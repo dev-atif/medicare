@@ -5,7 +5,7 @@ import actor12 from '../../../../public/actor2.png'
 import actor3 from '../../../../public/actor3.png'
 const OfferSection = () => {
   return (
-    <div className="flex px-20 gap-3 mt-20">
+    <div className="lg:flex xl:px-20 gap-3 mt-20 hidden ">
       <div className="w-1/3">
         <OffCard title={'Maternal Health and Comfort'} cashback={'5%'} bg="bg-[#FEC091]" image={actor1}/>
       </div>

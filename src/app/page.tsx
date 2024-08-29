@@ -10,24 +10,23 @@ import OfferSection from "./Components/Offer Section/OfferSection";
 export default function Home(props:any) {
 
   return (
-  <main className="px-5 pb-20">
-
-   <section>
+    <main className="lg:px-5 px-3 pb-20">
+      <section>
     <HeroSection/>
    </section>
    <section>
     <CareSection/>
    </section>
-   <section>
-    <ProductDealList/>
-   </section>
-   <section>
+      <section>
+        <TrendingProduct props={props} />
+      </section>
+      <section>
     <ConsulationSection/>
    </section>
-   <section><TrendingProduct props={props}/></section>
-   <section>
+
+      <section>
     <OfferSection/>
    </section>
-  </main>
+    </main>
   );
 }

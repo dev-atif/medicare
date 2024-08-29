@@ -35,12 +35,12 @@ const Data =[
 ]
 const CareSection = () => {
   return (
-    <div className='py-20 px-12 bg-white rounded-t-3xl z-50'>
-        <div className='flex gap-8 justify-center'>
+    <div className='xl:py-20 py-10 px-12 bg-white rounded-t-3xl z-50'>
+        <div className='flex xl:gap-8 gap-3 lg:flex-nowrap flex-wrap justify-center'>
        {
         Data.map((itm,idx)=>(
             <div  key={idx}>
-            <Image src={itm.image} alt={itm.slug}   className='h-48 hover:scale-105 transform transition-all duration-300 object-cover w-48 rounded-xl  '/>
+            <Image src={itm.image} alt={itm.slug}   className='xl:h-48 h-36 hover:scale-105 transform transition-all duration-300 object-cover xl:w-48 w-36 rounded-xl  '/>
             <h1 className='text-[#232458] font-semibold text-center mt-3'>
                 {itm.slug}
             </h1>

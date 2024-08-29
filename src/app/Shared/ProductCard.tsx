@@ -36,7 +36,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
   return (
     <div>
       <div className="w-full relative">
-        <div className="bg-[#F1F5F9]   -z-10 h-72  flex  items-center justify-center rounded-3xl">
+        <div className="bg-[#F1F5F9]   -z-10 lg:h-72  h-52 flex   items-center justify-center rounded-3xl">
           {data.image ? (
             <Image src={data.image} alt="product" />
           ) : (
@@ -44,7 +44,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
           )}
         </div>
         <div className="bg-white p-3 rounded-3xl z-20 -mt-8 border border-[#F1F5F9]">
-          <div className="flex items-center justify-between text-[#AAB2C0]">
+          <div className="flex items-center lg:text-lg  text-sm justify-between text-[#AAB2C0]">
             <h4>{data.Item_Category}</h4>
             <p className="flex items-center gap-1">
               {" "}
@@ -55,16 +55,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
             </p>
           </div>
           <div className="py-4">
-            <h1 className="text-[#20245C]  line-clamp-2 h-16 font-bold text-lg pe-4">
+            <h1 className="text-[#20245C]  line-clamp-2 lg:h-16 h-12 font-bold lg:text-lg text-sm pe-4">
               {data.Item_Name}
             </h1>
-            <h1 className="text-sm text-[#AAB2C0]">Company <span>({ data.Company?data.Company:'unknown'})</span></h1>
+            <h1 className="lg:text-sm text-xs text-[#AAB2C0]">Company <span>({ data.Company?data.Company:'unknown'})</span></h1>
            
           </div>
           
-          <div className="flex items-center justify-between">
-            <div className="w-[45%]">
-              <button onClick={()=>{addToCart(data)}} className="flex  text-sm items-center gap-0.5 text-[#20245C] border-2 font-bold border-[#20245C] w-full py-2 justify-center rounded-3xl">
+          <div className="flex items-center gap-6 justify-between">
+            <div className="flex-1">
+              <button onClick={()=>{addToCart(data)}} className="flex  lg:text-sm text-xs items-center gap-0.5 text-[#20245C] border-2 font-bold border-[#20245C] w-full py-2 justify-center rounded-3xl">
                 <span>
                   <FaPlus size={12} />
                 </span>{" "}
@@ -72,10 +72,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
               </button>
             </div>
             <div>
-              <p className="flex items-center text-[#20245C] gap-1 font-semibold">
+              <p className="flex items-center lg:text-lg text-sm text-[#20245C] gap-1 font-semibold">
                 {/* <span className="text-[#AAB2C0] text-sm line-through">$80.00</span> */}
                 {data.saleprice ? (
-                  <span className="text-[#AAB2C0] text-sm line-through">
+                  <span className="text-[#AAB2C0] lg:text-sm text-xs line-through">
                     ${data.saleprice}
                   </span>
                 ) : null}

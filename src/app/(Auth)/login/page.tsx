@@ -76,14 +76,14 @@ const page = () => {
     });
   };
   return (
-    <div className="flex items-start gap-4">
-      <div className="w-1/2 relative full">
+    <div className="flex items-start gap-4 ">
+      <div className="w-1/2 relative lg:block full hidden">
         <Image src={loginimg} alt="login" className="absolute h-screen" />
       </div>
-      <div className="w-1/2 ">
+      <div className="lg:w-1/2 w-full  ">
         <div className="font-sans text-gray-900 antialiased">
-          <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-[#f8f4f3]">
-            <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+          <div className="min-h-screen flex flex-col justify-center px-10 lg:px-0  items-center pt-6 sm:pt-0 bg-[#f8f4f3]">
+            <div className="w-full sm:max-w-md mt-6 px-6 py-4  bg-white shadow-md overflow-hidden rounded-lg">
               <div className="py-8">
                 <center className="text-4xl flex items-center justify-center font-semibold  gap-3 text-[#FF5C04] ">
                   <span>

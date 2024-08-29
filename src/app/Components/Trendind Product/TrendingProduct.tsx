@@ -101,12 +101,12 @@ const TrendingProduct = ({ props }: any) => {
   });
 
   return (
-    <div className="px-20 ">
+    <div className="xl:px-20  ">
       <div className="flex  items-end justify-between">
-        <h1 className="text-4xl font-bold w-1/4 text-[#242A60]">
+        <h1 className="lg:text-4xl text-xl font-bold xl:w-1/4 w-1/2 text-[#242A60]">
           Trending Products for you!
         </h1>
-        <p className="uppercase text-sm text-[#242A60] cursor-pointer group flex items-center gap-2">
+        <p className="uppercase lg:text-sm text-xs text-[#242A60] cursor-pointer group flex items-center gap-2">
           <Link href={"/AllProduct"}>See All Products </Link>
           <span className="group-hover:translate-x-2 transition-all transform duration-300">
             <FaArrowRightLong />
@@ -114,7 +114,7 @@ const TrendingProduct = ({ props }: any) => {
         </p>
       </div>
       {/* --------Category------------------ */}
-      <div className=" flex flex-wrap mt-10 ">
+      <div className=" flex overflow-x-auto gap-2 mt-10 xl:justify-center">
         {data?.map((itm: any, idx: any) => (
           <div key={idx}>
             <button
@@ -122,7 +122,7 @@ const TrendingProduct = ({ props }: any) => {
                 params.set("cat", itm.Company);
                 router.push(`/AllProduct?${params.toString()}`);
               }}
-              className="bg-[#F1F5F9] rounded-full px-8 hover:bg-[#163300] hover:text-[#93D366] transform transition-all text-base duration-300 text-[#26275C] font-semibold py-2  "
+              className="bg-[#F1F5F9] rounded-full inline-block whitespace-nowrap px-4 hover:bg-[#163300] hover:text-[#93D366] transform transition-all text-base duration-300 text-[#26275C] font-semibold py-2  "
             >
               {itm.Company}
             </button>
@@ -131,15 +131,7 @@ const TrendingProduct = ({ props }: any) => {
       </div>
       {/* ------------Product------------------------------- */}
 
-      <div className="mt-10">
-        <div className="flex  flex-wrap gap-6 justify-center">
-          {/* {ProductData.map((itm, idx) => (
-            <div key={idx} className="w-[23%]">
-              <ProductCard data={itm} />
-            </div>
-          ))} */}
-        </div>
-      </div>
+     
     </div>
   );
 };

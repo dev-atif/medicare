@@ -37,12 +37,12 @@ const ProductData = [
 ];
 const ProductDealList = () => {
   return (
-    <div className="px-20">
+    <div className="lg:px-20 px-3">
       <div className="flex  items-end justify-between">
-        <h1 className="text-4xl font-bold w-1/4 text-[#242A60]">
+        <h1 className="lg:text-4xl text-xl font-bold xl:w-1/4 w-1/2  text-[#242A60]">
           Todays best deals for you!
         </h1>
-        <Link href={'/AllProduct'} className="uppercase text-sm text-[#242A60] cursor-pointer group flex items-center gap-2">
+        <Link href={'/AllProduct'} className="uppercase lg:text-sm text-xs text-[#242A60] cursor-pointer group flex items-center gap-2">
           See All Products{" "}
           <span className="group-hover:translate-x-2 transition-all transform duration-300">
             <FaArrowRightLong />

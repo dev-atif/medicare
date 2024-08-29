@@ -73,11 +73,11 @@ const page = () => {
   };
   return (
     <div>
-      <div className="flex items-start gap-4">
-        <div className="w-1/2 relative full">
+      <div className="lg:flex items-start gap-4">
+        <div className="w-1/2 hidden lg:block relative full">
           <Image src={signup} alt="login" className="absolute h-screen" />
         </div>
-        <div className="w-1/2  bg-[#f8f4f3] h-screen flex items-center justify-between ">
+        <div className="lg:w-1/2 w-full  bg-[#f8f4f3] h-screen flex items-center justify-between  px-10">
           <div className="max-w-lg mx-auto  rounded-xl bg-white shadow-lg px-8 py-10 flex flex-col w-full items-center">
             <h1 className="text-xl uppercase tracking-widest font-bold text-center text-black mb-8">
               Welcome to{" "}

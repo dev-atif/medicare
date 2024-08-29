@@ -48,7 +48,7 @@ const AllProduct = ({ props }: any) => {
       setFIlterData(data?.GetallData?.GetallData);
     }
     setPage(pageParam);
-  }, [router, data]);
+  }, [router, data, initialPage]);
 
   useEffect(() => {
     let filterSortData = data?.GetallData?.GetallData || [];
@@ -119,7 +119,7 @@ const AllProduct = ({ props }: any) => {
   return (
     <Suspense fallback={<div>Loading..</div>}>
       <div>
-        <div className="px-12">
+        <div className="lg:px-12 px-3">
           <div className="mt-12 flex items-center justify-center">
             <div></div>
             <h1 className="text-4xl uppercase ProductHeading   tracking-widest  text-[#242A60] font-bold">
@@ -148,15 +148,15 @@ const AllProduct = ({ props }: any) => {
           </div>
 
           {/* -------------------------------------------------------------------------------------------------------- */}
-          <div className="flex gap-8 flex-wrap justify-center  mt-20">
+          <div className="flex lg:gap-8 gap-3 flex-wrap xl:justify-center  mt-20">
             {filterdata?.map((itm, idx) => (
-              <div key={idx} className="w-[20%]">
+              <div key={idx} className="xl:w-[20%] lg:w-[31%] w-[48%]" >
                 <ProductCard data={itm} />
               </div>
             ))}
           </div>
-          <div className="flex items-center justify-center mt-4">
-            <div className="flex justify-between my-6 w-1/4 ">
+          <div className="flex items-center  justify-center mt-4">
+            <div className="flex justify-between my-6 lg:w-1/4 w-1/2  ">
               <button
                 onClick={() => ButtonHandler(page - 1)}
                 className={`${

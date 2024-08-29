@@ -6,9 +6,9 @@ import Image from "next/image";
 
 const ConsulationSection = () => {
   return (
-    <div className="px-20 my-16 ">
-      <div className="flex items-center space-x-8">
-        <div className="w-1/2  ">
+    <div className="xl:px-20 my-16 ">
+      <div className="lg:flex items-center lg:space-x-8 space-y-6 lg:space-y-0">
+        <div className="lg:w-1/2 w-full ">
           <UploadPrescription
             bgmain={"bg-[#FFEB68]"}
             inerbg={"bg-white"}
@@ -17,18 +17,18 @@ const ConsulationSection = () => {
             textcolor="#3F3922"
             btncolor={"bg-[#3A341C]"}
             paddingy={"py-12"}
-            size={150}
+            size={'text-[8rem]'}
           />
         </div>
-        <div className=" w-1/2   rounded-3xl bg-[#FEC091] py-4 px-20 relative">
-          <div className="flex  flex-col space-y-20">
-            <div className={`  pt-16 `}>
-              <div className="w-1/2 flex flex-col gap-6 mt-2">
+        <div className=" lg:w-1/2  w-full  rounded-3xl bg-[#FEC091] py-2 lg:px-20 px-5 relative z-10">
+          <div className="flex  flex-col lg:space-y-20">
+            <div className={`  lg:pt-16 py-16 lg:py-0 `}>
+              <div className="lg:w-1/2 flex flex-col gap-6 mt-2">
                 {" "}
-                <h1 className="text-2xl  font-bold">
+                <h1 className="lg:text-2xl text-xl  font-bold">
                   Don't have a Prescription?
                 </h1>
-                <span className="text-sm">
+                <span className="text-sm w-1/2 lg:w-full" >
                   Upload only -jpg .png or .pdf files Size limit is 15 MB
                 </span>
               </div>
@@ -41,16 +41,16 @@ const ConsulationSection = () => {
               </div>
               <div>
                 <button
-                  className={` text-white py-2 px-8 bg-[#260B2F] rounded-full `}
+                  className={` text-white w-full py-2 px-8 bg-[#260B2F] rounded-full `}
                 >
                   Order Via Prescription
                 </button>
               </div>
             </div>
           </div>
-          <div className="absolute bottom-0 right-4">
+          <div className="absolute bottom-0 lg:right-4  left-1/3 xl:left-1/2 -z-10 xl:z-0">
             <Image src={doc} alt="doc" />
-          </div> 
+          </div>
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ReduxProvider>
-          <div className="   hidden lg:block">
+          <div className="   ">
             <NavBar />
           </div>
           <QueryProvider>{children}</QueryProvider>

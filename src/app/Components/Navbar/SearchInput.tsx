@@ -7,9 +7,14 @@ import { RxCross1 } from "react-icons/rx";
 const SearchInput = ({ currentRefinement, refine }: any) => {
   const route = useRouter();
   const handleChange = (event: any) => {
-    
-    console.warn(refine);
-    route.push(`?search=${event.target.value}`);
+    const value = event.target.value;
+
+    if (value) {
+      // If there's a value, redirect to the AllProduct page
+      route.push(`/AllProduct?search=${value}`);
+    } else {
+      route.push("/AllProduct");
+    }
   };
   return (
     <div className="">
@@ -24,7 +29,6 @@ const SearchInput = ({ currentRefinement, refine }: any) => {
           placeholder="Medicine and Healthcare Items "
           className="bg-transparent focus:outline-none w-full pe-5"
         />
-        
       </div>
     </div>
   );

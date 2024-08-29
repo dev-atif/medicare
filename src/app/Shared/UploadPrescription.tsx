@@ -25,16 +25,16 @@ const UploadPrescription = ({
   return (
     <div className={`${bgmain} p-4 rounded-3xl`}>
       <div
-        className={`${inerbg} ${textcolor}  gap-8 flex items-center  border-2 border-[#072400] border-dashed  rounded-xl px-5 justify-center ${paddingy}`}
+        className={`${inerbg} ${textcolor}  gap-8 flex items-center  border-2 border-[#072400] border-dashed  rounded-xl px-5 justify-between ${paddingy}`}
       >
         <div className="w-1/2 flex flex-col gap-6">
           {" "}
-          <h1 className="text-2xl font-bold">{title}</h1>
-          <span className="text-sm" >{subtitle}</span>
+          <h1 className="lg:text-2xl  font-bold">{title}</h1>
+          <span className="text-sm">{subtitle}</span>
         </div>
-        <div className="w-1/3">
+        <div className="w-1/3 flex items-center justify-end">
           <span>
-            <LuClipboardList size={size} />
+            <LuClipboardList className={`${size} `} />
           </span>
         </div>
       </div>
