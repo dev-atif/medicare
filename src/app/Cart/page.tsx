@@ -21,10 +21,9 @@ import withAuth from "../Components/withAuth";
 import { useAppSelector } from "@/Hooks/useRedux";
 import useSingleUser from "@/Hooks/useSingleuser";
 import { ADD_To_Cart } from "@/Graphql/Mutation";
-
+import emailjs from "@emailjs/browser";
 
 const page = () => {
- 
   const { cart, increaseQuantity, decreaseQuantity, deleteProduct, clearCart } =
     UseCart();
   const { token } = useAppSelector((s) => s.token);
@@ -39,7 +38,7 @@ const page = () => {
   };
 
   const { data }: any = useSingleUser({ session });
-  console.warn(data?.GetSingleUser.Firstname);
+
   const totalAmount = calculateTotalAmount();
 
   //Mutation Code -------------------
@@ -63,8 +62,7 @@ const page = () => {
       return response.data;
     },
     onSuccess: async () => {
-      toast.success("your Order has been placed");
-      //Send Email code
+      toast.success("Order has been placed");
     },
     onError: async () => {
       toast.error("Failed to place the order");
@@ -157,7 +155,6 @@ const page = () => {
                 <td colSpan={6} className="text-center font-bold p-2">
                   Total Amount: ${totalAmount}
                 </td>
-               
               </tr>
             </tbody>
           </table>

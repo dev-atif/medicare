@@ -53,7 +53,7 @@ const NavBar = () => {
         <div>
           <SearchInput />
         </div>
-        <div className="w-1/4 flex items-center justify-center">
+        <div className="w-1/4 flex items-center justify-end">
           <span
             onClick={() => {
               setOpen((prev) => !prev);
@@ -67,7 +67,7 @@ const NavBar = () => {
         className={` w-full bg-[#9FE870]  lg:bg-transparent transform transition-all duration-500 lg:relative fixed z-50 top-0 left-0 lg:h-auto h-screen 
          ${open ? "translate-x-0" : "-translate-x-[200%] lg:-translate-x-0"}`}
       >
-        <div className="flex  lg:flex-row flex-col h-screen lg:h-auto lg:justify-between justify-evenly  ">
+        <div className="flex  lg:flex-row flex-col h-screen lg:h-auto lg:justify-between justify-evenly items-start lg:items-center px-10 lg:px-0 ">
           <div className="absolute top-10 right-12 lg:hidden ">
             <span
               onClick={() => {
@@ -79,8 +79,8 @@ const NavBar = () => {
             </span>
           </div>
           {/* Left Side */}
-          <div className="flex items-center lg:justify-between justify-center gap-8">
-            <div className="w-[40%]">
+          <div className="flex items-center lg:justify-between  gap-8">
+            <div className="lg:w-[40%] w-[60%]">
               {/* --------Logo------------ */}
 
               <Link href={"/"}>
@@ -104,19 +104,7 @@ const NavBar = () => {
             </div>
           </div>
           {/* Right Side  */}
-          <div className="flex items-center  lg:flex-row flex-col  justify-between gap-6">
-            <div className="flex   items-start justify-start relative">
-              <p className="text-white absolute -top-2  bg-[#FF5C04] px-1 rounded-lg text-xs ms-3 -mb-2">
-                New
-              </p>
-              <select className="w-fit bg-transparent border border-none   focus-within:outline-none text-gray-900 text-md rounded-lg focus:ring-none focus:border-none block  p-2.5">
-                <option selected>HealthCare Services</option>
-                <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option>
-              </select>
-            </div>
+          <div className="flex   lg:flex-row flex-col items-start justify-between gap-6">
             <div>
               <h3 className="text-[#FF5C04] flex items-center font-medium gap-1">
                 <BiSolidOffer size={30} /> Offers
@@ -152,7 +140,7 @@ const NavBar = () => {
                   href={"/login"}
                   onClick={() => {
                     dispatch(removeToken());
-                     setOpen(!open);
+                    setOpen(!open);
                   }}
                   className=" flex items-center font-medium gap-1"
                 >

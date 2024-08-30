@@ -62,3 +62,13 @@ export interface UserData {
   userId: string;
   userName: string;
 }
+export interface EmailParams {
+  to_name: string;
+  to_email: string;
+  order_details: {
+    Item_Name: string;
+    quantity: number;
+    Sale_Price: number;
+  }[];
+  total_amount: number;
+}

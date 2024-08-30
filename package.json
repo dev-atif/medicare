@@ -9,12 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@reduxjs/toolkit": "^2.2.7",
     "@tanstack/react-query": "^5.51.21",
     "@tanstack/react-query-devtools": "^5.51.21",
     "ag-grid-react": "^32.1.0",
     "algoliasearch": "^4.24.0",
     "axios": "^1.7.3",
+    "emailjs": "^4.0.3",
     "emailjs-com": "^3.2.0",
     "graphql-request": "^7.1.0",
     "graphql-tag": "^2.12.6",
